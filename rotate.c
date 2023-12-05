@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_rotate.c                                   :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpadenko <dpadenko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 19:08:30 by dpadenko          #+#    #+#             */
-/*   Updated: 2023/12/02 20:48:15 by dpadenko         ###   ########.fr       */
+/*   Updated: 2023/12/04 15:18:05 by dpadenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,18 @@ void    rotate(list **stack)
 void    ra(list **a)
 {
     rotate(a);
-        write(1, "ra\n", 3);
+    write(1, "ra\n", 3);
 }
 
 void    rb(list **b)
 {
     rotate(b);
-        write(1, "rb\n", 3);
+    write(1, "rb\n", 3);
+}
+
+void    rr(list **a, list **b)
+{
+    rotate(a);
+    rotate(b);
+    write(1, "rr\n", 3);
 }

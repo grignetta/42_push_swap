@@ -6,7 +6,7 @@
 /*   By: dpadenko <dpadenko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 19:10:02 by dpadenko          #+#    #+#             */
-/*   Updated: 2023/12/04 11:41:37 by dpadenko         ###   ########.fr       */
+/*   Updated: 2023/12/04 15:18:49 by dpadenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,21 @@ void    reverse_rotate(list **stack)
 void    rra(list **a)
 {
     reverse_rotate(a);
-        write(1, "rra\n", 4);
+    write(1, "rra\n", 4);
     return ;
 }
 
 void    rrb(list **b)
 {
     reverse_rotate(b);
-        write(1, "rrb\n", 4);
+    write(1, "rrb\n", 4);
+    return ;
+}
+
+void    rrr(list **a, list **b)
+{
+    reverse_rotate(a);
+    reverse_rotate(b);
+    write(1, "rrr\n", 4);
     return ;
 }

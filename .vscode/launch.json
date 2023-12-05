@@ -1,0 +1,45 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+	  {
+		"name": "Debug Session",
+		"type": "cppdbg",
+		"request": "launch",
+		"args": [
+		  "-1476 1011 921 -1059 950 -156 -1326 -1043 342 452 -1020 1447 -1468 1358 667 1386 -917 1059 308 -977 1283 1146 -1135 -1450 -235 -839 -39 -477 -518 877"
+		],
+		"stopAtEntry": false,
+		"externalConsole": false,
+		"cwd": "/nfs/homes/dpadenko/pushswap/git_push_swap",
+		"program": "/nfs/homes/dpadenko/pushswap/git_push_swap/outDebug",
+		"MIMode": "gdb",
+		"miDebuggerPath": "gdb",
+		"setupCommands": [
+		  {
+			"description": "Enable pretty-printing for gdb",
+			"text": "-enable-pretty-printing",
+			"ignoreFailures": true
+		  }
+		]
+	  },
+	  {
+		"name": "C/C++ Runner: Debug Session",
+		"type": "cppdbg",
+		"request": "launch",
+		"args": [],
+		"stopAtEntry": false,
+		"externalConsole": false,
+		"cwd": "/nfs/homes/dpadenko/pushswap",
+		"program": "/nfs/homes/dpadenko/pushswap/build/Debug/outDebug",
+		"MIMode": "gdb",
+		"miDebuggerPath": "gdb",
+		"setupCommands": [
+		  {
+			"description": "Enable pretty-printing for gdb",
+			"text": "-enable-pretty-printing",
+			"ignoreFailures": true
+		  }
+		]
+	  }
+	]
+  }

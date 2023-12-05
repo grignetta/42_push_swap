@@ -6,7 +6,7 @@
 #    By: dpadenko <dpadenko@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 11:32:55 by dpadenko          #+#    #+#              #
-#    Updated: 2023/12/04 12:22:34 by dpadenko         ###   ########.fr        #
+#    Updated: 2023/12/04 15:38:29 by dpadenko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ NAME = push_swap
 LIBDIR = ./libft
 LIBFT = ${LIBDIR}/libft.a
 
-SRC = first_trial.c ft_strtok.c push.c rotate.c reverse_rotate.c swap.c
+SRC = first_trial.c ft_strtok.c push.c rotate.c reverse_rotate.c swap.c \
+		build_list.c main.c prebuild_controls.c
 
 OBJ = ${SRC:.c=.o}
 
