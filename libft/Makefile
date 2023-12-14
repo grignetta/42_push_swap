@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dpadenko <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: dpadenko <dpadenko@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 16:23:59 by dpadenko          #+#    #+#              #
-#    Updated: 2023/09/15 16:46:46 by dpadenko         ###   ########.fr        #
+#    Updated: 2023/12/14 13:49:17 by dpadenko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 	  ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c \
 	  ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
 	  ft_strmapi.c ft_striteri.c ft_putchar_fd.c \
-	  ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
+	  ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_strtok.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -37,7 +37,7 @@ $(NAME): $(OBJ)
 
 .PHONY: clean fclean all re
 
-clean: 
+clean:
 		rm -rf $(OBJ)
 fclean: clean
 		rm -rf $(NAME)

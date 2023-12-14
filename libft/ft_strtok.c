@@ -6,29 +6,11 @@
 /*   By: dpadenko <dpadenko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 15:57:17 by dpadenko          #+#    #+#             */
-/*   Updated: 2023/12/03 17:55:00 by dpadenko         ###   ########.fr       */
+/*   Updated: 2023/12/14 14:07:58 by dpadenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
-#include"push_swap.h"
-
-char	*ft_strchr(const char *s, int c)
-{
-	unsigned char	i;
-
-	i = (unsigned char) c;
-	while (*s != '\0')
-	{
-		if (*s == i)
-			return ((char *)s);
-		s++;
-	}
-	if (!i && *s == '\0')
-		return ((char *)s);
-	return (NULL);
-}
+#include "libft.h"
 
 char	*ft_strtok(char *str, const char *delim)
 {
@@ -38,21 +20,21 @@ char	*ft_strtok(char *str, const char *delim)
 	result = str;
 	if (str)
 		i = str;
-	while(*i && ft_strchr(delim, *i))
+	while (*i && ft_strchr(delim, *i))
 		i++;
 	str = i;
-	while(*str)
+	while (*str)
 	{
 		result = str;
 		while (str && !ft_strchr(delim, *str))
 			str++;
-		if(*str)
+		if (*str)
 			i = str + 1;
 		else
 			i = str;
 		*str = '\0';
 	}
-		return (result);
+	return (result);
 }
 /*
 int main(void)

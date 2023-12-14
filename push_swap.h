@@ -6,102 +6,110 @@
 /*   By: dpadenko <dpadenko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 17:41:04 by dpadenko          #+#    #+#             */
-/*   Updated: 2023/12/05 16:48:00 by dpadenko         ###   ########.fr       */
+/*   Updated: 2023/12/14 20:07:42 by dpadenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <unistd.h>
-#include <limits.h>
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
+# include <stdio.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include <unistd.h>
+# include <limits.h>
+# include "libft/libft.h"
 
-typedef struct node
+typedef struct s_node
 {
-	int			value;
-	int			pos;
-	int			cost;
-	int			size;
-	struct node	*next;
-	struct node	*prev;
-	void        (*algorithm)(struct node **a, struct node **b, struct node *to_push, struct node *receive_pos);
-}				list;
+	int				value;
+	int				pos;
+	bool			above_med;
+	int				cost;
+	int				size;
+	struct s_node	*next;
+	struct s_node	*prev;
+	void			(*algorithm)(struct s_node **a, struct s_node **b,
+			struct s_node *to_push, struct s_node *receive_pos);
+}				t_list;
 
-typedef struct {
-    int sizea;
-    int sizeb;
-    int posa;
-    int posb;
-	list *to_push;
-    list *receive_pos;
-} algorithm_params;
+typedef struct s_algorithm_params
+{
+	int			sizea;
+	int			sizeb;
+	int			posa;
+	int			posb;
+	bool		abvmed_a;
+	bool		abvmed_b;
+	t_list		*to_push;
+	t_list		*receive_pos;
+}	t_algorithm_params;
 
-long 	ft_atol(const char *nptr, bool *error);
-void 	free_stack(list **stack);
-void	repeated_or_not_int(list **stack, long value,bool *error);
-void	append_node(list **stack, int nbr);
-list 	*ft_lstlast(list *lst);
-void 	print_stack(list *stack); //delete later;
-void	set_current_position(list **stack);
-int		stack_len(list *stack);
-bool 	stack_sorted(list *stack);
-bool 	stack_half_sorted(list *stack);
-void 	print_position(list *stack); //delete later;
-list    *find_biggest_value(list *stack);
-list    *find_smallest_value(list *stack);
-void    sort_three(list **stack);
+//building a stack including error checking
+t_list	*build_stack_args(t_list **stack, char **argv, int argc, bool *error);
+t_list	*build_stack_string(t_list **stack, char **argv, bool *error);
+t_list	*build_stack_main(t_list **stack, char **argv, int argc, bool *error);
+long	ft_atol(const char *nptr, bool *error);
+void	free_stack(t_list **stack);
+void	repeated_or_not_int(t_list **stack, long value, bool *error);
+void	append_node(t_list **stack, int nbr);
 
-void    set_len_pos(list *a,list  *b);//
+//sorting controls to stop unnecessary moving to stack b
+bool	stack_sorted(t_list *stack);
+bool	stack_half_sorted(t_list *stack);
 
-bool 	stack_rev_sorted(list *stack);// probably not needed function
-bool 	stack_half_rev_sorted(list *stack); // probably not needed function
+//main function for sorting
+void	sort_stack(t_list **a, t_list **b);
+void	sort_three(t_list **stack);
+void	handle_five(t_list **a, t_list **b);
+void	finalize_sorting(t_list **stack);
+void	set_cost_b(t_list **a, t_list **b);
+void	*return_algorithm(t_algorithm_params params, t_list *node);
+int		return_smallest_cost(int sizea, int sizeb, int posa, int posb);
+void	set_current_position(t_list **stack);
+int		stack_len(t_list *stack);
+t_list	*find_biggest_value(t_list *stack);
+t_list	*find_smallest_value(t_list *stack);
+void	set_len_pos(t_list *a, t_list *b);
+t_list	*find_smaller(t_list *a, t_list *b);
+t_list	*find_bigger(t_list *a, t_list *b);
+int		difference(t_list *a, t_list *b);
+t_list	*node_to_push(t_list **stack);
+void	push_to_a(t_list **a, t_list **b);
+void	push_to_b(t_list **a, t_list **b);
+void	set_cost_b(t_list **a, t_list **b);
+void	set_cost_a(t_list **a, t_list **b);
+void	set_params(t_list **a, t_list **b, t_list *a_to_push,
+			t_list *smaller_b);
 
-void    finalize_sorting(list **stack);
-void    push_to_b(list **a, list **b);
-int 	difference(list *a, list *b);
-list    *find_smaller(list *a, list *b);
-list    *find_bigger(list *a, list *b);
-void    push_to_a(list **a, list **b);
-void    sort_stack(list **a, list **b);
+//cost calculation and the algorithm choice based on that
+int		cost_rr(int posa, int posb);
+int		cost_rrr(int posa, int posb, int sizea, int sizeb);
+int		cost_ra_rrb(int posa, int posb, int sizeb);
+int		cost_rra_rb(int posa, int posb, int sizea);
+void	alg_rr(t_list **a, t_list **b, t_list *to_push, t_list *receive_pos);
+void	alg_rrr(t_list **a, t_list **b, t_list *to_push, t_list *receive_pos);
+void	alg_ra_rrb(t_list **a, t_list **b, t_list *to_push,
+			t_list *receive_pos);
+void	alg_rra_rb(t_list **a, t_list **b, t_list *to_push,
+			t_list *receive_pos);
 
-void    push(list **dest, list **src);
-void    pb(list **b, list **a);
-void    pa(list **a, list **b);
+//main commands for moving the numbers in a stack
+void	push(t_list **dest, t_list **src);
+void	pb(t_list **b, t_list **a);
+void	pa(t_list **a, t_list **b);
+void	rotate(t_list **stack);
+void	ra(t_list **a);
+void	rb(t_list **b);
+void	rr(t_list **a, t_list **b);
+void	rev_rotate(t_list **stack);
+void	rra(t_list **a);
+void	rrb(t_list **b);
+void	rrr(t_list **a, t_list **b);
+void	swap(t_list **stack);
+void	sa(t_list **a);
+void	sb(t_list **b);
+t_list	*ft_lstlast(t_list *lst);
 
-void    rotate(list **stack);
-void    ra(list **a);
-void    rb(list **b);
-void    rr(list **a, list **b);
-
-void    rev_rotate(list **stack);
-void    rra(list **a);
-void    rrb(list **b);
-void    rrr(list **a, list **b);
-
-void    swap(list **stack);
-void    sa(list **a);
-void    sb(list **b);
-
-char	*ft_strtok(char *str, const char *delim); // better to pass through libft
-char	*ft_strchr(const char *s, int c); // better to pass through libft
-
-list *build_stack_args(list **stack, char **argv, int argc, bool *error);
-list *build_stack_string(list **stack, char **argv, bool *error);
-list *build_stack_main(list **stack, char **argv, int argc, bool *error);
-
-int cost_rr(int posa, int posb);
-int cost_rrr(int posa, int posb, int sizea, int sizeb);
-int cost_ra_rrb(int posa, int posb, int sizeb);
-int cost_rra_rb(int posa, int posb, int sizea);
-
-void    alg_rr(list **a, list **b, list *to_push, list *receive_pos);
-void    alg_rrr(list **a, list **b, list *to_push, list *receive_pos);
-void    alg_ra_rrb(list **a, list **b, list *to_push, list *receive_pos);
-void    alg_rra_rb(list **a, list **b, list *to_push, list *receive_pos);
-
-list    *node_to_push(list **stack);
-void set_cost_a(list **a,list  **b);
-void set_cost_b(list **a,list  **b);
-
-void *return_algorithm(algorithm_params params, list *node);
-int return_smallest_cost(int sizea, int sizeb, int posa, int posb);
+//void 	print_stack(list *stack);
+//void 	print_position(list *stack);
+#endif

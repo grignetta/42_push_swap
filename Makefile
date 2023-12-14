@@ -6,7 +6,7 @@
 #    By: dpadenko <dpadenko@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 11:32:55 by dpadenko          #+#    #+#              #
-#    Updated: 2023/12/04 15:38:29 by dpadenko         ###   ########.fr        #
+#    Updated: 2023/12/14 20:45:53 by dpadenko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,34 +27,41 @@ CFLAGS = -Wall -Werror -Wextra
 NAME = push_swap
 
 LIBDIR = ./libft
+PRINTFDIR = ./printf
 LIBFT = ${LIBDIR}/libft.a
+PRINTF = ${PRINTFDIR}/libftprintf.a
 
-SRC = first_trial.c ft_strtok.c push.c rotate.c reverse_rotate.c swap.c \
-		build_list.c main.c prebuild_controls.c
+SRC = positioning.c push.c rotate.c reverse_rotate.c swap.c \
+		build_list.c main.c prebuild_controls.c \
+		cost_calculation.c return_algorithm.c set_cost.c sort_stack.c \
+		sort_aux.c
 
 OBJ = ${SRC:.c=.o}
 
-%.o: %.c
-		${CC} ${CFLAGS} -o $@ -c $< -I .
+all: ${NAME}
 
-${NAME}: ${LIBFT} ${OBJ}
-		cp ${LIBFT} ${NAME}
-		ar -rcs $@ ${OBJ}
-		${CC} ${CFLAGS} -L${LIBDIR} -lft ${OBJ} -o ${NAME}
+%.o: %.c
+		${CC} ${CFLAGS} -o $@ -c $< -I . -I $(PRINTFDIR)
+
+${NAME}: ${LIBFT} ${PRINTF} ${OBJ}
+		${CC} ${CFLAGS} ${OBJ} -L${LIBDIR} -lft -L${PRINTFDIR} -lftprintf -o ${NAME}
 
 ${LIBFT}:
 		${MAKE} -C ${LIBDIR} all
 
-all: ${NAME}
+${PRINTF}:
+		${MAKE} -C ${PRINTFDIR} all
 
 .PHONY: clean fclean all re
 
 clean:
 		${MAKE} -C ${LIBDIR} clean
+		${MAKE} -C ${PRINTFDIR} clean
 		rm -f ${OBJ} ${OBJ_B}
 
 fclean: clean
 		${MAKE} -C ${LIBDIR} fclean
+		${MAKE} -C ${PRINTFDIR} fclean
 		rm -rf ${NAME}
 
 re: fclean all
