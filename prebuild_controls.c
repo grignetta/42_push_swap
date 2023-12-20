@@ -6,7 +6,7 @@
 /*   By: dpadenko <dpadenko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:32:43 by dpadenko          #+#    #+#             */
-/*   Updated: 2023/12/14 21:24:31 by dpadenko         ###   ########.fr       */
+/*   Updated: 2023/12/18 12:35:59 by dpadenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ long	ft_atol(const char *nptr, bool *error)
 		number = number * 10 + (nptr[i++] - '0');
 		*error = false;
 	}
-	if (nptr[i] != '\0')
+	if (nptr[i] != '\0' || i > 11)
 		*error = true;
 	if ((count % 2) == 1)
 		return (-1 * number);

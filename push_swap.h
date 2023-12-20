@@ -6,7 +6,7 @@
 /*   By: dpadenko <dpadenko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 17:41:04 by dpadenko          #+#    #+#             */
-/*   Updated: 2023/12/14 20:07:42 by dpadenko         ###   ########.fr       */
+/*   Updated: 2023/12/18 09:58:49 by dpadenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,32 @@ void	append_node(t_list **stack, int nbr);
 bool	stack_sorted(t_list *stack);
 bool	stack_half_sorted(t_list *stack);
 
-//main function for sorting
+//main sorting algorithm, all steps to do
 void	sort_stack(t_list **a, t_list **b);
 void	sort_three(t_list **stack);
 void	handle_five(t_list **a, t_list **b);
 void	finalize_sorting(t_list **stack);
-void	set_cost_b(t_list **a, t_list **b);
-void	*return_algorithm(t_algorithm_params params, t_list *node);
-int		return_smallest_cost(int sizea, int sizeb, int posa, int posb);
-void	set_current_position(t_list **stack);
-int		stack_len(t_list *stack);
-t_list	*find_biggest_value(t_list *stack);
-t_list	*find_smallest_value(t_list *stack);
-void	set_len_pos(t_list *a, t_list *b);
-t_list	*find_smaller(t_list *a, t_list *b);
-t_list	*find_bigger(t_list *a, t_list *b);
-int		difference(t_list *a, t_list *b);
-t_list	*node_to_push(t_list **stack);
+
+//node moving from one to another stack
 void	push_to_a(t_list **a, t_list **b);
 void	push_to_b(t_list **a, t_list **b);
-void	set_cost_b(t_list **a, t_list **b);
-void	set_cost_a(t_list **a, t_list **b);
 void	set_params(t_list **a, t_list **b, t_list *a_to_push,
 			t_list *smaller_b);
+t_list	*node_to_push(t_list **stack);
+t_list	*find_smaller(t_list *a, t_list *b);
+t_list	*find_bigger(t_list *a, t_list *b);
+t_list	*find_biggest_value(t_list *stack);
+t_list	*find_smallest_value(t_list *stack);
+
+//finding the cost
+void	set_cost_b(t_list **a, t_list **b);
+void	set_cost_a(t_list **a, t_list **b);
+int		return_smallest_cost(int sizea, int sizeb, int posa, int posb);
+void	*return_algorithm(t_algorithm_params params, t_list *node);
+void	set_current_position(t_list **stack);
+void	set_len_pos(t_list *a, t_list *b);
+int		difference(t_list *a, t_list *b);
+int		stack_len(t_list *stack);
 
 //cost calculation and the algorithm choice based on that
 int		cost_rr(int posa, int posb);
@@ -101,7 +104,7 @@ void	rotate(t_list **stack);
 void	ra(t_list **a);
 void	rb(t_list **b);
 void	rr(t_list **a, t_list **b);
-void	rev_rotate(t_list **stack);
+void	reverse_rotate(t_list **stack);
 void	rra(t_list **a);
 void	rrb(t_list **b);
 void	rrr(t_list **a, t_list **b);

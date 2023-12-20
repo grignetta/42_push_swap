@@ -6,13 +6,12 @@
 /*   By: dpadenko <dpadenko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:24:07 by dpadenko          #+#    #+#             */
-/*   Updated: 2023/12/14 21:27:59 by dpadenko         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:03:17 by dpadenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
-#include "printf/ft_printf.h"
 
 t_list	*build_stack_main(t_list **stack, char **argv, int argc, bool *error)
 {
@@ -41,7 +40,7 @@ t_list	*build_stack_string(t_list **stack, char **argv, bool *error)
 		}
 		else
 		{
-			ft_printf("Error\n");
+			write(2, "Error\n", 6);
 			free_stack(stack);
 			return (NULL);
 		}
@@ -64,7 +63,7 @@ t_list	*build_stack_args(t_list **stack, char **argv, int argc, bool *error)
 			append_node(stack, (int)value);
 		else
 		{
-			ft_printf("Error\n");
+			write(2, "Error\n", 6);
 			free_stack(stack);
 			return (NULL);
 		}

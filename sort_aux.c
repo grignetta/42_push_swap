@@ -6,7 +6,7 @@
 /*   By: dpadenko <dpadenko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 13:47:43 by dpadenko          #+#    #+#             */
-/*   Updated: 2023/12/14 20:12:23 by dpadenko         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:42:56 by dpadenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,15 @@ void	sort_three(t_list **stack)
 void	finalize_sorting(t_list **stack)
 {
 	t_list	*biggest;
-	int		pos_to_last;
 
 	(*stack)->size = stack_len(*stack);
 	biggest = find_biggest_value(*stack);
-	pos_to_last = (*stack)->size - biggest->pos + 1;
+	set_current_position(stack);
 	while (*stack)
 	{
 		if (stack_half_sorted(*stack))
 		{
-			if (biggest->pos <= pos_to_last)
+			if (biggest->above_med == true)
 				ra(stack);
 			else
 				rra(stack);
