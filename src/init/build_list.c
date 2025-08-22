@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft/libft.h"
+#include "libft.h"
 
 t_list	*build_stack_main(t_list **stack, char **argv, int argc, bool *error)
 {

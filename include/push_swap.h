@@ -17,7 +17,7 @@
 # include <stdbool.h>
 # include <unistd.h>
 # include <limits.h>
-# include "libft/libft.h"
+# include "libft.h"
 
 typedef struct s_node
 {

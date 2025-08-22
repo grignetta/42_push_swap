@@ -1,0 +1,14 @@
+# binaries
+push_swap
+checker
+
+# build artifacts
+obj/
+*.o
+*.a
+*.dSYM/
+*.out
+*.log
+
+# OS junk
+.DS_Store

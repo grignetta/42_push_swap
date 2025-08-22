@@ -10,47 +10,45 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
-CFLAGS = -Wall -Werror -Wextra
-NAME = push_swap
+CC       = cc
+CFLAGS   = -Wall -Wextra -Werror -Iinclude -I$(LIBFT_INC)
+NAME     = push_swap
 
-LIBDIR = ./libft
-#PRINTFDIR = ./printf
-LIBFT = ${LIBDIR}/libft.a
-#PRINTF = ${PRINTFDIR}/libftprintf.a
+# Libft (submodule)
+LIBFT_DIR = libft
+LIBFT_A   = $(LIBFT_DIR)/libft.a
+LIBFT_INC = $(LIBFT_DIR)
 
-SRC = positioning.c push.c rotate.c reverse_rotate.c swap.c \
-		build_list.c main.c prebuild_controls.c \
-		cost_calculation.c return_algorithm.c set_cost.c sort_stack.c \
-		sort_aux.c
+SRCDIR   = src
+OBJDIR   = obj
 
-OBJ = ${SRC:.c=.o}
+SRC = $(SRCDIR)/main.c \
+      $(wildcard $(SRCDIR)/init/*.c) \
+      $(wildcard $(SRCDIR)/ops/*.c)  \
+      $(wildcard $(SRCDIR)/algo/*.c)
 
-all: ${NAME}
+OBJ = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRC))
 
-%.o: %.c
-#		${CC} ${CFLAGS} -o $@ -c $< -I . -I $(PRINTFDIR)
-		${CC} ${CFLAGS} -o $@ -c $< -I .
+all: $(NAME)
 
-${NAME}: ${LIBFT} ${PRINTF} ${OBJ}
-#		${CC} ${CFLAGS} ${OBJ} -L${LIBDIR} -lft -L${PRINTFDIR} -lftprintf -o ${NAME}
-		${CC} ${CFLAGS} ${OBJ} -L${LIBDIR} -lft -o ${NAME}
-${LIBFT}:
-		${MAKE} -C ${LIBDIR} all
+$(NAME): $(LIBFT_A) $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -L$(LIBFT_DIR) -lft -o $@
 
-#${PRINTF}:
-#		${MAKE} -C ${PRINTFDIR} all
+$(LIBFT_A):
+	$(MAKE) -C $(LIBFT_DIR) all
 
-.PHONY: clean fclean all re
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-		${MAKE} -C ${LIBDIR} clean
-#		${MAKE} -C ${PRINTFDIR} clean
-		rm -f ${OBJ} ${OBJ_B}
+	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -rf $(OBJDIR)
 
 fclean: clean
-		${MAKE} -C ${LIBDIR} fclean
-#		${MAKE} -C ${PRINTFDIR} fclean
-		rm -rf ${NAME}
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re
